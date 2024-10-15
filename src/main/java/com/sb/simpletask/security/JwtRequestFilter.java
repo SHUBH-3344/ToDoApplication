@@ -1,6 +1,9 @@
 package com.sb.simpletask.security;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.stream.Collectors;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -33,10 +36,13 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
         String path = request.getRequestURI();
-        if (path.equals("/api/register") || path.equals("/api/authenticate")) {
+        if (path.equals("/api/register") || path.equals("/api/authenticate")
+        ) {
             chain.doFilter(request, response);
             return;
         }
+
+
         final String authorizationHeader = request.getHeader("Authorization");
 
         String username = null;

@@ -25,7 +25,8 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests()
+        http.cors().and()
+                .csrf().disable().authorizeRequests()
                 .antMatchers("/api/register").permitAll()
                 .antMatchers("/api/authenticate").permitAll()
                 .antMatchers("/v2/api-docs", "/swagger-ui.html", "/swagger-resources/**", "/webjars/**").permitAll()
